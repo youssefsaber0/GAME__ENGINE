@@ -124,7 +124,7 @@ class CheckerController {
     }
   def moveNorth(board: Array[Array[Char]], i: Int, j: Int,newI:Int,newJ:Int) ={
     var flag =false
-    if(i-newI!=1||Math.abs(j-newJ)!=1||board(newI)(newJ)=='-'||board(i)(j)=='P') {}
+    if(i-newI!=1||Math.abs(j-newJ)!=1||board(newI)(newJ)!='-'||board(i)(j)=='P') {}
     else if(board(newI)(newJ)=='-'){
       board(newI)(newJ) =board(i)(j)
       board(i)(j)='-'
@@ -132,14 +132,15 @@ class CheckerController {
     }
     flag
   }
-  def moveSouth(board: Array[Array[Char]], i: Int, j: Int,newI:Int,newJ:Int) ={
+  def moveSouth(board: Array[Array[Char]], i: Int, j: Int,newI:Int,newJ:Int): Boolean={
     var flag =false
-    if(newI-i!=1||Math.abs(j-newJ)!=1||board(newI)(newJ)=='-'||board(i)(j)=='p') {}
+    if(newI-i!=1||Math.abs(j-newJ)!=1||board(newI)(newJ)!='-'||board(i)(j)=='p') {}
     else if(board(newI)(newJ)=='-'){
       board(newI)(newJ) =board(i)(j)
       board(i)(j)='-'
+      flag=true
     }
-    flag=true
+    flag
   }
   def promote(board: Array[Array[Char]], i: Int, j: Int)= board(i)(j)match{
     case 'p' =>'k'
@@ -209,10 +210,23 @@ class CheckerController {
     flag
   }
   def vadiateInput(board: Array[Array[Char]],i:Int,j:Int,newI:Int,newJ:Int,player:Int): Boolean ={
-    if((player==0&&board(i)(j).isLower||player==0&&board(i)(j).isUpper)||board(newI)(newJ)!='-'){
+    if((player==0&&(!board(i)(j).isUpper)||player==0&&(!board(i)(j).isLower))||board(newI)(newJ)!='-'){
        false
     }
     else true
+  }
+  def move(board: Array[Array[Char]],i:Int,j:Int,newI:Int,newJ:Int): Boolean ={
+    var flag=false
+    if('p'==board(i)(j)){
+      flag=flag||moveNorth(board,i, j, newI, newJ)
+    }
+    else if('P'==board(i)(j))
+      flag=flag||moveSouth(board, i, j, newI, newJ)
+    else if(board(i)(j)!='-'){
+      flag=flag||moveNorth(board,i, j, newI, newJ)
+      flag=flag||moveSouth(board, i, j, newI, newJ)
+    }
+    flag
   }
   def game(board: Array[Array[Char]],i:Int,j:Int,newI:Int,newJ:Int,player:Int) :Boolean = {
     var board = init()
@@ -223,14 +237,18 @@ class CheckerController {
     if(!vadiateInput(board, i, j, newI, newJ, player)){
       return false
     }
-    var canMove = checkEat(board, 0, 0, player)
-    if (!canMove.isEmpty) {
-      if (!canMove.contains(i * 8 + j)) {
+    var canEat = checkEat(board, 0, 0, player)
+    if (!canEat.isEmpty) {
+      if (!canEat.contains(i * 8 + j)) {
         return false
       } else {
         return eatMove(board,i, j, newI, newJ)
       }
     }
-       true
+    else if(canMoveV(board, i, j)) {
+      move(board, i, j, newI, newJ)
+      return true
     }
+    false
+  }
 }
