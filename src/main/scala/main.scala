@@ -27,6 +27,8 @@
 //}
 
 
+import Checkers.controller.CheckerController
+import Checkers.view.Drawer
 import javafx.application.Application
 import javafx.scene.canvas.{Canvas, GraphicsContext}
 import javafx.scene.image.Image
@@ -90,12 +92,16 @@ class ImageExample extends Application {
     val gc  = canvas.getGraphicsContext2D
     canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (event: MouseEvent) => {
       def foo(event: MouseEvent) = {
-        val imgChina = new Image (System.getProperty("user.dir")+"\\image\\BKING.png");
-        println(System.getProperty("user.dir")+"\\image\\BKING.png")
-        gc.drawImage(imgChina,(event.getX/69).toInt*69+4,(event.getY/69).toInt*69+4,60,60)
-        println("("+event.getY+","+ event.getX+")")
+//        val imgChina = new Image (System.getProperty("user.dir")+"\\image\\CHECKER\\BKING.png");
+//        println(System.getProperty("user.dir")+"\\image\\BKING.png")
+//        gc.drawImage(imgChina,(event.getX/69).toInt*69+4,(event.getY/69).toInt*69+4,60,60)
+//        println("("+event.getY+","+ event.getX+")")
+//
+//        println((event.getY/69).toInt, (event.getX/69).toInt)
+val Drawer=new Drawer()
+        val board=new CheckerController()
 
-        println((event.getY/69).toInt, (event.getX/69).toInt)
+        Drawer.drawGame(gc,board.game(board.init()));
       }
       foo(event)
     })
@@ -105,8 +111,8 @@ class ImageExample extends Application {
     theStage.show();
   }
   def drawShapes(gc:GraphicsContext): Unit ={
-    val black = new Image (System.getProperty("user.dir")+"\\image\\BKING.png");
-    var board = new Image(System.getProperty("user.dir")+"\\image\\Board1.png");
+    val black = new Image (System.getProperty("user.dir")+"\\image\\CHECKER\\BKING.png");
+    var board = new Image(System.getProperty("user.dir")+"\\image\\CHECKER\\board.png");
 
     gc.drawImage(board,0,0,552,552)
 
