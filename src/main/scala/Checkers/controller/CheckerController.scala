@@ -228,12 +228,53 @@ class CheckerController {
     }
     flag
   }
+  def reEat(board: Array[Array[Char]],i:Int,j:Int): String ={
+    var flag="";
+    if(board(i)(j)=='p'){
+      if(eatMove(board,i,j,i-2,j-2)) {
+        flag= "northW"
+      }
+      else if(eatMove(board,i,j,i-2,j+2)){
+        flag= "northE"
+      }
+    }
+    if(board(i)(j)=='P'){
+      if(eatMove(board,i,j,i+2,j-2))
+        flag= "southW"
+      else if (eatMove(board,i,j,i+2,j+2)){
+        flag= "southE"
+      }
+    }
+    if(board(i)(j)=='k'||board(i)(j)=='K'){
+      if(eatMove(board,i,j,i-2,j-2))
+        flag= "northW"
+      else if(eatMove(board,i,j,i-2,j+2))
+        flag= "northE"
+      else if(eatMove(board,i,j,i+2,j-2))
+        flag= "southW"
+      else if(eatMove(board,i,j,i+2,j+2))
+        flag= "southE"
+
+    }
+    flag
+  }
+  def reEatNewi(string: String,i:Int):Int =String match{
+    case "northW"=>i-2
+    case "northE"=>i-2
+    case "southW"=>i+2
+    case "southE"=>i+2
+  }
+  def reEatNewj(string: String,j:Int):Int=string match{
+    case "northW"=>j-2
+    case "northE"=>j+2
+    case "southW"=>j-2
+    case "southE"=>j+2
+  }
   def game(board: Array[Array[Char]],i:Int,j:Int,newI:Int,newJ:Int,player:Int) :Boolean = {
     var board = init()
     if (!valdiateIndex(i, j) && (!valdiateIndex(i, j))) {
       return false;
     }
-
     if(!vadiateInput(board, i, j, newI, newJ, player)){
       return false
     }
@@ -242,7 +283,15 @@ class CheckerController {
       if (!canEat.contains(i * 8 + j)) {
         return false
       } else {
-        return eatMove(board,i, j, newI, newJ)
+        if( eatMove(board,i, j, newI, newJ)){
+          var newReI=newI
+          var newReJ=newJ
+          while (eatMatcher(board, newReI, newReJ)){
+           var string =reEat(board, newReI, newReJ)
+            newReI=reEatNewi(string,newReI)
+            newReJ=reEatNewj(string, newReJ)
+          }
+        }
       }
     }
     else if(canMoveV(board, i, j)) {
