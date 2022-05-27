@@ -98,10 +98,10 @@ class ImageExample extends Application {
 //        println("("+event.getY+","+ event.getX+")")
 //
 //        println((event.getY/69).toInt, (event.getX/69).toInt)
-val Drawer=new Drawer()
+        val Drawer=new Drawer()
         val board=new CheckerController()
 
-        Drawer.drawGame(gc,board.game(board.init()));
+        Drawer.drawGame(gc,board.init());
       }
       foo(event)
     })
