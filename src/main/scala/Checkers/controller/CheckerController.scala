@@ -142,9 +142,10 @@ class CheckerController {
     }
     flag
   }
-  def promote(board: Array[Array[Char]], i: Int, j: Int)= board(i)(j)match{
+  def promote(board: Array[Array[Char]], i: Int, j: Int):Char= board(i)(j)match{
     case 'p' =>'k'
     case 'P'=>'K'
+    case _=>_
   }
   def valdiateIndex(i:Int,j:Int): Boolean ={
    i>=0&&i<8&&j>=0&&j<8
@@ -271,7 +272,7 @@ class CheckerController {
     case "southE"=>j+2
   }
   def game(board: Array[Array[Char]],i:Int,j:Int,newI:Int,newJ:Int,player:Int) :Boolean = {
-    var board = init()
+
     if (!valdiateIndex(i, j) && (!valdiateIndex(i, j))) {
       return false;
     }
@@ -290,13 +291,20 @@ class CheckerController {
            var string =reEat(board, newReI, newReJ)
             newReI=reEatNewi(string,newReI)
             newReJ=reEatNewj(string, newReJ)
+            if(newReI==0||newReI==7){
+              board(newReI)(newReJ)=promote(board, newReI, newReJ)
+            }
           }
         }
       }
     }
     else if(canMoveV(board, i, j)) {
-      move(board, i, j, newI, newJ)
-      return true
+      if(move(board, i, j, newI, newJ)){
+        if(newI==7||newI==0){
+          board(newI)(newJ)=promote(board, newI, newJ)
+        }
+        return true
+      }
     }
     false
   }
