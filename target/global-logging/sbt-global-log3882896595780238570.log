@@ -50,3 +50,102 @@
 [debug]           Load.loadUnit: defsScala took 0.0034ms
 [debug] [Loading] Scanning directory C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject\project
 [debug]             Load.loadUnit: mkEval took 3.6253ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject\project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 3.4296 ms
+[info] loading settings for project paradigmsproject-build from idea.sbt ...
+[debug]               Load.resolveProject(paradigmsproject-build) took 5.9027ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id paradigmsproject-build, base: C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject\project, plugins: List(<none>))) took 10.2832ms
+[debug] [Loading] Done in C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject\project, returning: (paradigmsproject-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 1865.5093ms
+[debug]           Load.loadUnit: cleanEvalClasses took 12.2581ms
+[debug]         Load.loadUnit(file:/C:/Users/Meniem/Downloads/ParadigmsProject/ParadigmsProject/project/, ...) took 1896.8088ms
+[debug]       Load.apply: load took 1898.3142ms
+[debug]       Load.apply: resolveProjects took 0.117ms
+[debug]       Load.apply: finalTransforms took 12.8525ms
+[debug]       Load.apply: config.delegates took 0.4335ms
+[debug]       Load.apply: Def.make(settings)... took 60.7816ms
+[debug]       Load.apply: structureIndex took 22.5036ms
+[debug]       Load.apply: mkStreams took 0.0022ms
+[info] loading project definition from C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject\project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[warn] Unrecognized repository Scala Plugin Bundled Repository, ignoring it
+[warn] Unrecognized repository Scala Plugin Bundled Repository, ignoring it
+[debug]     Load.loadUnit: plugins took 4025.3518ms
+[debug]     Load.loadUnit: defsScala took 0.0041ms
+[debug] [Loading] Scanning directory C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject
+[debug]       Load.loadUnit: mkEval took 0.2982ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.StructurePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.IdeaShellPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.StructurePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.IdeaShellPlugin)))
+[debug] Clause(And(Set(Atom(sbt.plugins.CorePlugin), Atom(sbt.plugins.JvmPlugin))),Set(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.SemanticdbPlugin,org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin,sbt.plugins.JUnitXmlReportPlugin,org.jetbrains.sbt.IdeaShellPlugin,org.jetbrains.sbt.StructurePlugin,sbt.plugins.MiniDependencyTreePlugin)
+[debug] Plugins.deducer#function took 1.6761 ms
+[info] loading settings for project paradigmsproject from build.sbt ...
+[debug]         Load.resolveProject(paradigmsproject) took 18.7415ms
+[debug]       Load.loadTransitive: finalizeProject(Project(id paradigmsproject, base: C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject, plugins: List(<none>))) took 21.1583ms
+[debug] [Loading] Done in C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject, returning: (paradigmsproject)
+[debug]     Load.loadUnit: loadedProjectsRaw took 1886.6297ms
+[debug]     Load.loadUnit: cleanEvalClasses took 33.0955ms
+[debug]   Load.loadUnit(file:/C:/Users/Meniem/Downloads/ParadigmsProject/ParadigmsProject/, ...) took 5945.9489ms
+[debug] Load.apply: load took 5947.2579ms
+[debug] Load.apply: resolveProjects took 0.0769ms
+[debug] Load.apply: finalTransforms took 18.2584ms
+[debug] Load.apply: config.delegates took 0.2942ms
+[debug] Load.apply: Def.make(settings)... took 51.5471ms
+[debug] Load.apply: structureIndex took 21.2984ms
+[debug] Load.apply: mkStreams took 0.0021ms
+[info] set current project to ParadigmsProject (in build file:/C:/Users/Meniem/Downloads/ParadigmsProject/ParadigmsProject/)
+[warn] there's a key that's not used by any other settings/tasks:
+[warn]  
+[warn] * paradigmsproject / mainClass
+[warn]   +- C:\Users\Meniem\Downloads\ParadigmsProject\ParadigmsProject\build.sbt:13
+[warn]  
+[warn] note: a setting might still be used by a command; to exclude a key from this `lintUnused` check
+[warn] either append it to `Global / excludeLintKeys` or call .withRank(KeyRanks.Invisible) on the key
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(notifyUsersAboutShell, None, None)
+[debug] > Exec(iflast shell, None, None)
+[debug] > Exec(; set ideaPort in Global := 65104 ; idea-shell, None, None)
+[debug] > Exec(set ideaPort in Global := 65104, None, None)
+[info] Defining Global / ideaPort
+[info] The new value will be used by Compile / compile, Test / compile
+[debug] Defining 
+[debug] 	Global / ideaPort
+[debug] 
+[debug] The new value will be used by 
+[debug] 	Compile / compile
+[debug] 	Test / compile
+[info] Reapplying settings...
+[info] set current project to ParadigmsProject (in build file:/C:/Users/Meniem/Downloads/ParadigmsProject/ParadigmsProject/)
+[debug] > Exec(idea-shell, None, None)
