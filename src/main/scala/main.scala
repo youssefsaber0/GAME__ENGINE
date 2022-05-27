@@ -101,7 +101,7 @@ class ImageExample extends Application {
 val Drawer=new Drawer()
         val board=new CheckerController()
 
-        Drawer.drawGame(gc,board.game(board.init()));
+        Drawer.drawGame(gc,(board.init()));
       }
       foo(event)
     })

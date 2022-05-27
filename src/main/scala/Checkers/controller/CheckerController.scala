@@ -145,7 +145,7 @@ class CheckerController {
   def promote(board: Array[Array[Char]], i: Int, j: Int):Char= board(i)(j)match{
     case 'p' =>'k'
     case 'P'=>'K'
-    case _=>_
+    case _=>board(i)(j)
   }
   def valdiateIndex(i:Int,j:Int): Boolean ={
    i>=0&&i<8&&j>=0&&j<8
@@ -259,7 +259,7 @@ class CheckerController {
     }
     flag
   }
-  def reEatNewi(string: String,i:Int):Int =String match{
+  def reEatNewi(string: String,i:Int):Int =string match{
     case "northW"=>i-2
     case "northE"=>i-2
     case "southW"=>i+2
