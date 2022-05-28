@@ -17,10 +17,6 @@ class Chess_Controller extends IController {
     board
   }
 
-  override def checkClicks(clicks : Array[(Int,Int)]) : Boolean = {
-    clicks.length==2
-  }
-
   def validateInput(board : Array[Array[Char]], source : (Int, Int), destination : (Int, Int), player: Boolean): Boolean = {
 
     val sourceRow: Int = source._1
@@ -87,8 +83,8 @@ class Chess_Controller extends IController {
   }
 
   override def runGame(board : Array[Array[Char]],clicks : Array[(Int,Int)] , player: Boolean): Boolean = {
-    val source  = map(clicks(0))
-    val destination = map(clicks(1))
+    val source  = getLogicalPos(clicks(0))
+    val destination = getLogicalPos(clicks(1))
     if (validateInput(board,source,destination,player)
       &&  checkMove(board,source,destination)){
       makeMove(board,source,destination)
@@ -97,8 +93,8 @@ class Chess_Controller extends IController {
     false
   }
 
-  def map(click : (Int,Int)): (Int,Int) ={
-    (click._1/69,click._2/69)
+  def getLogicalPos(pos: (Int, Int)) : (Int, Int) = {
+    (pos._1/69, pos._2/69)
   }
 
   def printBoard(board : Array[Array[Char]]) : Unit = {
@@ -109,6 +105,8 @@ class Chess_Controller extends IController {
       println()
     }
   }
+
+  override def gameMovesPieces(): Boolean = true
 
 }
 

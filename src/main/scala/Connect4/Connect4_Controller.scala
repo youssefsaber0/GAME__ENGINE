@@ -57,9 +57,6 @@ class Connect4_Controller extends IController{
     -1
   }
 
-  override def checkClicks(clicks: Array[(Int, Int)]): Boolean = {
-    clicks.length==1
-  }
 
   def printBoard(board : Array[Array[Char]]): Unit = {
     for (r <- 0 to 5) {
@@ -69,4 +66,13 @@ class Connect4_Controller extends IController{
       println()
     }
   }
+
+  def getLogicalPos(pos: (Int, Int)) : (Int, Int) = {
+    if (pos._2 <= 16 || pos._2 >= 536)
+      return (0, -1)
+
+    (0, (pos._2 - 16) / 75)
+  }
+  override def gameMovesPieces(): Boolean = false
+
 }

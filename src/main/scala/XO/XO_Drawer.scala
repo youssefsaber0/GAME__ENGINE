@@ -32,4 +32,7 @@ class XO_Drawer extends IDrawer {
   }
 
   val getActualPos: Int => Double = x => x * 100 + 55
+
+  override def movePieceToCursor(gc: GraphicsContext, board: Array[Array[Char]], selectedPieceIndex: (Int,Int), cursor: (Int,Int)): Unit = {}
+
 }

@@ -37,8 +37,8 @@ class Checkers_Controller extends IController{
   }
   def eatNorthCheck(board: Array[Array[Char]], i: Int, j: Int): Boolean ={
     var flag=false
-    if (i - 2 > 0) {
-      if (j - 2 > 0) {
+    if (i - 2 >= 0) {
+      if (j - 2 >= 0) {
         if(board(i-1)(j-1)!='-')
         if (((board(i)(j).isLower && board(i-1)(j-1).isUpper)||(board(i)(j).isUpper && board(i-1)(j-1).isLower))&&board(i-2)(j-2)=='-') {
           if (board(i - 2)(j - 2) == '-') {
@@ -60,7 +60,7 @@ class Checkers_Controller extends IController{
   def eatSouthCheck(board: Array[Array[Char]], i: Int, j: Int): Boolean = {
     var flag = false;
     if (i + 2 < 8) {
-      if (j - 2 > 0) {
+      if (j - 2 >= 0) {
         if(board(i+1)(j-1)!='-')
           if (((board(i)(j).isLower && board(i+1)(j-1).isUpper)||(board(i)(j).isUpper && board(i+1)(j-1).isLower))&&board(i+2)(j-2)=='-') {
           if (board(i + 2)(j - 2) == '-') {
@@ -190,10 +190,6 @@ class Checkers_Controller extends IController{
   }
   def eatSouth(board: Array[Array[Char]], i: Int, j: Int,newI:Int,newJ:Int): Boolean ={
     var flag=false
-//    println(newI)
-//    println(i)
-//    print((newI-i) )
-
         if ((board(i)(j) == 'p') || (newI - i) != 2) {
           return false
         }
@@ -341,13 +337,7 @@ class Checkers_Controller extends IController{
     }
     flag
   }
-  def checkClicks(clicks:Array[(Int,Int)]): Boolean ={
-    var flag=false
-    if(clicks.length==2){
-      flag=true
-    }
-    flag
-  }
+
   def runGame(board: Array[Array[Char]],clicks:Array[(Int,Int)],player:Boolean): Boolean ={
     var i=clicks(0)._1/69;
     var j=clicks(0)._2/69;
@@ -359,5 +349,11 @@ class Checkers_Controller extends IController{
      var flag =game(board,i,j,newI,newJ,intPlayer)
     flag
   }
+
+  def getLogicalPos(pos: (Int, Int)) : (Int, Int) = {
+    (pos._1/69, pos._2/69)
+  }
+
+  override def gameMovesPieces(): Boolean = true
 
 }

@@ -20,4 +20,6 @@ class Connect4_Drawer extends IDrawer {
     }
   }
 
+  override def movePieceToCursor(gc: GraphicsContext, board: Array[Array[Char]], selectedPieceIndex: (Int,Int), cursor: (Int,Int)): Unit = {}
+
 }

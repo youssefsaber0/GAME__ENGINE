@@ -1,17 +1,13 @@
 class XO_Controller extends IController {
 
   override def runGame(board: Array[Array[Char]], clicks: Array[(Int, Int)], player: Boolean): Boolean = {
-    val logicalPos = getLogicalPos(clicks(0)._1, clicks(0)._2)
+    val logicalPos = getLogicalPos(clicks(0))
     val correct = validate(board)(logicalPos._1, logicalPos._2)
     applyMove(board, getPiece(player))(logicalPos._1, logicalPos._2, correct)
     for(i <- 0 to 2; j <- 0 to 2) println(s"=> ${board(i)(j)}")
     correct
   }
 
-  override def checkClicks(clicks: Array[(Int, Int)]): Boolean = {
-    if(clicks.length != 1) false
-    else true
-  }
 
   override def init(): Array[Array[Char]] = {
     Array(Array(' ', ' ', ' '), Array(' ', ' ', ' '), Array(' ', ' ', ' '))
@@ -37,8 +33,9 @@ class XO_Controller extends IController {
     case false => 'o'
   }
 
-  val getLogicalPos : (Int, Int) => (Int, Int) = (x,y) => {
-    println(x, y)
+  def getLogicalPos(pos: (Int, Int)) : (Int, Int) = {
+    val x = pos._1
+    val y = pos._2
     if(x < 55 || y < 55)  (-1, -1)
     else{
       val pos = ((x - 55) / 100, (y - 55) / 100)
@@ -46,5 +43,7 @@ class XO_Controller extends IController {
       pos
     }
   }
+
+  override def gameMovesPieces(): Boolean = false
 
 }

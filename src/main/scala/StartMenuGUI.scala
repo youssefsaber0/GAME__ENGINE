@@ -19,7 +19,7 @@ object StartMenuGUI {
       stage = new JFXApp.PrimaryStage {
         title = "BOARD GAMES ENGINE"
         val root = new Group
-        scene = new Scene(root, 552, 552, Color.Green.brighter) {
+        scene = new Scene(root, 552, 580, Color.rgb(239, 238, 210)) {
             val label = new Label("CHOOSE A GAME TO START")
             label.setFont(Font.font("Impact", FontWeight.BOLD, 20))
             label.setLayoutX(160); label.setLayoutY(80)
@@ -48,38 +48,45 @@ object StartMenuGUI {
             imageViewCheckers.setFitWidth(100); imageViewCheckers.setFitHeight(100)
             buttonCheckers.setLayoutX(270); buttonCheckers.setLayoutY(140)
 
+            val playTurnLabel = new Label("Player 1 turn")
+            playTurnLabel.setFont(Font.font("Impact", FontWeight.BOLD, 20))
+            playTurnLabel.setLayoutX(200); playTurnLabel.setLayoutY(555)
+
+            val backToMenuButton = new Button("Back To Main Menu")
+            backToMenuButton.setFont(Font.font("Impact", FontWeight.NORMAL, 15))
+            backToMenuButton.setLayoutX(0); backToMenuButton.setLayoutY(552)
+            backToMenuButton.onMouseClicked = e => {
+              content = List(label, buttonXO, buttonChess, buttonCheckers, buttonConnect4)
+            }
+
             buttonXO.onMouseClicked = e => {
               val canvas = new Canvas(410, 410)
               canvas.getGraphicsContext2D.fillRect(0, 0, 500, 500)
-              content.setAll(canvas)
-              Engine.selectGame(0, canvas);
+              content.setAll(canvas, playTurnLabel, backToMenuButton)
+              Engine.selectGame(0, canvas, playTurnLabel);
             }
             buttonChess.onMouseClicked = e => {
               val canvas = new Canvas(552, 552)
               canvas.getGraphicsContext2D.fillRect(0, 0, 552, 552)
-              content.setAll(canvas)
-              Engine.selectGame(1, canvas);
+              content.setAll(canvas, playTurnLabel, backToMenuButton)
+              Engine.selectGame(1, canvas, playTurnLabel);
             }
             buttonCheckers.onMouseClicked = e => {
               val canvas = new Canvas(552, 552)
               canvas.getGraphicsContext2D.fillRect(0, 0, 500, 500)
-              content.setAll(canvas)
-              Engine.selectGame(2,canvas);
+              content.setAll(canvas, playTurnLabel, backToMenuButton)
+              Engine.selectGame(2,canvas, playTurnLabel);
             }
             buttonConnect4.onMouseClicked = e => {
               val canvas = new Canvas(552, 552)
               canvas.getGraphicsContext2D.fillRect(0, 0, 500, 500)
-              content.setAll(canvas)
-              Engine.selectGame(3, canvas);
+              content.setAll(canvas, playTurnLabel, backToMenuButton)
+              Engine.selectGame(3, canvas, playTurnLabel);
             }
-
             content = List(label, buttonXO, buttonChess, buttonCheckers, buttonConnect4)
         }
       }
-      stage.setMaxWidth(552)
-      stage.setMinWidth(552)
-      stage.setMinHeight(552)
-      stage.setMaxHeight(552)
+      stage.setResizable(false)
       val icon = new Image(new FileInputStream("images/board_games_icon.jpg"))
       stage.getIcons.add(icon)
     }
