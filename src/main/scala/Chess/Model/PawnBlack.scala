@@ -14,7 +14,7 @@ object PawnBlack {
 
     if (destinationColumn == sourceColumn && destinationRow - sourceRow == 1 && board(destinationRow)(destinationColumn) == '-')
       isValidMove = true
-    else if (sourceRow == 6 && destinationColumn == sourceColumn && destinationRow - sourceRow == 2 &&
+    else if (sourceRow == 1 && destinationColumn == sourceColumn && destinationRow - sourceRow == 2 &&
       board(destinationRow)(destinationColumn) == '-' &&  board(destinationRow - 1)(destinationColumn) == '-')
       isValidMove = true
     else if (Math.abs(destinationColumn - sourceColumn) == 1 && destinationRow - sourceRow == 1 && board(destinationRow)(destinationColumn) != '-')

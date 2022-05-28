@@ -1,8 +1,6 @@
 import javafx.scene.input.MouseEvent
 import scalafx.scene.canvas.{Canvas, GraphicsContext}
 
-import scala.::
-
 object Engine {
 
   def getControllerAndDrawer(game: Int): (IController, IDrawer) = game match{
@@ -40,6 +38,14 @@ object Engine {
           }
         }
         onMouseClicked(event)
+    })
+
+    canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (event: MouseEvent) => {
+
+    })
+
+    canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, (event: MouseEvent) => {
+
     })
   }
 

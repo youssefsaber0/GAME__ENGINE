@@ -10,7 +10,6 @@ class Connect4_Controller extends IController{
 
   override def runGame(board: Array[Array[Char]], clicks: Array[(Int, Int)], player: Boolean): Boolean = {
     val col = getColIndexFromPosition(clicks(0))
-    print(col.toString())
 
     if (isValidMove(board, col)) {
       applyMoveToBoard(board, col, player)
@@ -20,35 +19,46 @@ class Connect4_Controller extends IController{
   }
 
   def getColIndexFromPosition(position: (Int, Int)): Int = {
-    if (position._1 < 16 || position._1 > 536)
-        return -1
-    (position._1 - 16) / 75
+    if (position._2 <= 16 || position._2 >= 536)
+      return -1
+
+    (position._2 - 16) / 75
   }
 
   def isValidMove(board: Array[Array[Char]], col: Int ): Boolean = {
-    moveIndicesIsInBound(col) && isBoardBlockEmpty(board, col) && !tokenIsFloating(board, col)
+    moveIndicesIsInBound(col) && !columnIsFull(board, col)
   }
 
   def moveIndicesIsInBound(col: Int): Boolean = {
-    0 < col && col < 6
+    0 <= col && col <= 6
   }
 
-  def colH(board: Array[Array[Char]], block: (Int,Int)): Boolean = {
-    board(block._1)(block._2) == '-'
+  def columnIsFull(board: Array[Array[Char]], col: Int): Boolean = {
+    for (r <- 0 to 5) {
+      if (board(r)(col) == '-')
+        return false
+    }
+    true
   }
 
-  def tokenIsFloating(board: Array[Array[Char]], indices: (Int,Int)): Boolean = {
-    indices._1 == 0 || board(indices._1 - 1)(indices._2) != '-'
-  }
-
-  def applyMoveToBoard(board: Array[Array[Char]], move: (Int,Int), isRedTurn: Boolean): Array[Array[Char]]  = {
+  def applyMoveToBoard(board: Array[Array[Char]], col: Int, isRedTurn: Boolean): Array[Array[Char]]  = {
     var char: Char = if (isRedTurn) 'R' else 'Y'
-    board(move._1)(move._2) = char
+    val r = getFirstFreeRowIndex(board, col)
+    board(r)(col) = char
+
     board
   }
 
+  def getFirstFreeRowIndex(board: Array[Array[Char]], col: Int): Int = {
+    for (r <- 5 to 0 by -1) {
+      if (board(r)(col) == '-')
+        return r
+    }
+    -1
+  }
+
   override def checkClicks(clicks: Array[(Int, Int)]): Boolean = {
-    clicks.length==2
+    clicks.length==1
   }
 
   def printBoard(board : Array[Array[Char]]): Unit = {

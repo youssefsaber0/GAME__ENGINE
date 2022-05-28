@@ -49,7 +49,7 @@ object StartMenuGUI {
             buttonCheckers.setLayoutX(270); buttonCheckers.setLayoutY(140)
 
             buttonXO.onMouseClicked = e => {
-              val canvas = new Canvas(300, 300)
+              val canvas = new Canvas(410, 410)
               canvas.getGraphicsContext2D.fillRect(0, 0, 500, 500)
               content.setAll(canvas)
               Engine.selectGame(0, canvas);
@@ -80,6 +80,8 @@ object StartMenuGUI {
       stage.setMinWidth(552)
       stage.setMinHeight(552)
       stage.setMaxHeight(552)
+      val icon = new Image(new FileInputStream("images/board_games_icon.jpg"))
+      stage.getIcons.add(icon)
     }
     app.main(Array(""))
   }

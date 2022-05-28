@@ -9,9 +9,8 @@ object Bishop {
     val destinationRow: Int = destination._1
     val destinationColumn: Int = destination._2
 
-    if(sourceRow == destinationRow || sourceColumn == destinationColumn){
+    if (Math.abs(destinationRow - sourceRow) != Math.abs(destinationColumn - sourceColumn))
       return false
-    }
 
     if(sourceRow > destinationRow ){ // Up
       if(sourceColumn < destinationColumn) { // Up-Right
@@ -25,6 +24,7 @@ object Bishop {
           j+=1
         }
       }
+
       else { // Up-Left
         var i = sourceRow - 1
         var j = sourceColumn - 1

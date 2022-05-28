@@ -16,12 +16,13 @@ class Checkers_Controller extends IController{
     board
   }
   def checkEat(board: Array[Array[Char]], i: Int, j: Int,player:Int): List[Int] = {
+    if (i == 8 && j == 0) {
+      return List();
+    }
     if (j > 7 && i < 8) {
       return checkEat(board, i + 1, 0,player)
     }
-    if (i > 7 && j > 7) {
-      return List();
-    }
+
     if (eatMatcher(board, i, j)&&((player==0&&board(i)(j).isUpper)||(player==1&&board(i)(j).isLower))) {
       return (i * 8 + j :: checkEat(board, i, j + 1,player))
     }
@@ -36,16 +37,18 @@ class Checkers_Controller extends IController{
   }
   def eatNorthCheck(board: Array[Array[Char]], i: Int, j: Int): Boolean ={
     var flag=false
-    if (i - 2 < 8) {
-      if (j - 2 < 8) {
-        if ((board(i)(j).isLower && !board(i-1)(j-1).isLower)||(board(i)(j).isLower && !board(i-1)(j-1).isLower)) {
+    if (i - 2 > 0) {
+      if (j - 2 > 0) {
+        if(board(i-1)(j-1)!='-')
+        if (((board(i)(j).isLower && board(i-1)(j-1).isUpper)||(board(i)(j).isUpper && board(i-1)(j-1).isLower))&&board(i-2)(j-2)=='-') {
           if (board(i - 2)(j - 2) == '-') {
             flag = true
           }
         }
       }
       if (j + 2 < 8) {
-        if ((board(i)(j).isLower && !board(i-1)(j+1).isLower)||(board(i)(j).isLower && !board(i-1)(j+1).isLower)) {
+        if(board(i-1)(j+1)!='-')
+        if (((board(i)(j).isLower && board(i-1)(j+1).isUpper)||(board(i)(j).isUpper && board(i-1)(j+1).isLower))&&board(i-2)(j+2)=='-') {
           if (board(i - 2)(j + 2) =='-') {
             flag = true
           }
@@ -57,15 +60,17 @@ class Checkers_Controller extends IController{
   def eatSouthCheck(board: Array[Array[Char]], i: Int, j: Int): Boolean = {
     var flag = false;
     if (i + 2 < 8) {
-      if (j - 2 < 8) {
-        if ((board(i)(j).isLower && !board(i+1)(j-1).isLower)||(board(i)(j).isLower && !board(i+1)(j-1).isLower)) {
+      if (j - 2 > 0) {
+        if(board(i+1)(j-1)!='-')
+          if (((board(i)(j).isLower && board(i+1)(j-1).isUpper)||(board(i)(j).isUpper && board(i+1)(j-1).isLower))&&board(i+2)(j-2)=='-') {
           if (board(i + 2)(j - 2) == '-') {
             flag = true
           }
         }
       }
       if (j + 2 < 8) {
-        if ((board(i)(j).isLower && !board(i+1)(j+1).isLower)||(board(i)(j).isLower && !board(i+1)(j+1).isLower)) {
+        if(board(i+1)(j+1)!='-')
+          if (((board(i)(j).isLower && board(i+1)(j+1).isUpper)||(board(i)(j).isUpper && board(i+1)(j+1).isLower))&&board(i+2)(j+2)=='-') {
           if (board(i + 2)(j + 2) == '-') {
             flag = true
           }
@@ -83,34 +88,42 @@ class Checkers_Controller extends IController{
   def northMovesV(board: Array[Array[Char]], i: Int, j: Int): Boolean ={
     var flag=false;
     if(i-1>=0) {
-      if (board(i - 1)(j - 1) == '-') {
-        flag = true
+      if(j-1>=0) {
+        if (board(i - 1)(j - 1) == '-') {
+          flag = true
+        }
       }
-      if (board(i - 1)(j + 1) == '-')
-        flag = true
+      if(j+1<8) {
+        if (board(i - 1)(j + 1) == '-')
+          flag = true
+      }
     }
     flag
   }
   def southMovesV(board: Array[Array[Char]], i: Int, j: Int): Boolean ={
     var flag=false;
     if(i+1<=7) {
-      if (board(i + 1)(j - 1) == '-')
-        flag = true
-      if (board(i + 1)(j + 1) == '-')
-        flag = true
+      if(j-1>=0) {
+        if(i+1<8&&j-1>=0)
+        if (board(i + 1)(j - 1) == '-')
+          flag = true
+      }
+      if(i+1<8&&j+1<8)
+        if (board(i + 1)(j + 1) == '-')
+          flag = true
     }
     flag
   }
   def canMoveV(board: Array[Array[Char]], i: Int, j: Int): Boolean ={
     var flag =false
-    if(board(i)(j)==' ')
+    if(board(i)(j)=='-')
     {
     }
-    else if(board(i)(j).isUpper){
+    else if(board(i)(j)=='k'||board(i)(j)=='K'){
       flag=flag||northMovesV(board,i,j)
       flag=flag||southMovesV(board,i,j)
     }else{
-      if(board(i)(j)==' '){
+      if(board(i)(j)=='p'){
         flag=flag||northMovesV(board,i,j)
       }
       else{
@@ -149,7 +162,10 @@ class Checkers_Controller extends IController{
   }
   def eatNorth(board: Array[Array[Char]], i: Int, j: Int,newI:Int,newJ:Int): Boolean ={
     var flag=false;
-    if((board(i)(j)=='P')||(newI-i)!=2||(board(i-1)(j+1)!='-'&&board(i-1)(j-1)!='-')){
+    if((board(i)(j)=='P'||(i-newI)!=2)){
+      return false
+    }
+    if((newJ>j&&board(i-1)(j+1)=='-')||(newJ<j&&board(i-1)(j-1)=='-')){
       return false
     }
     if(i-2>=0) {
@@ -174,27 +190,35 @@ class Checkers_Controller extends IController{
   }
   def eatSouth(board: Array[Array[Char]], i: Int, j: Int,newI:Int,newJ:Int): Boolean ={
     var flag=false
-    if((board(i)(j)=='p')||(i-newJ)!=2||(board(i+1)(j+1)!='-'&&board(i+1)(j-1)!='-')){
+//    println(newI)
+//    println(i)
+//    print((newI-i) )
+
+        if ((board(i)(j) == 'p') || (newI - i) != 2) {
+          return false
+        }
+
+    if((newJ>j&&board(i+1)(j+1)=='-')||(newJ<j&&board(i+1)(j-1)=='-')){
       return false
     }
-    if(i-2>=0) {
-      if((newJ-j)==2){
-        if((board(i)(j).isLower&&board(i+1)(j+1).isUpper||board(i)(j).isUpper&&board(i+1)(j+1).isLower)&&(board(i+1)(j+1)!='-')&&board(newI)(newJ)=='-'){
-          board(i+1)(j+1)='-'
-          board(newI)(newJ)=board(i)(j)
-          board(i)(j)='-'
-          flag=true
+      if (i + 2 < 8) {
+        if ((newJ - j) == 2) {
+          if ((board(i)(j).isLower && board(i + 1)(j + 1).isUpper || board(i)(j).isUpper && board(i + 1)(j + 1).isLower) && (board(i + 1)(j + 1) != '-') && board(newI)(newJ) == '-') {
+            board(i + 1)(j + 1) = '-'
+            board(newI)(newJ) = board(i)(j)
+            board(i)(j) = '-'
+            flag = true
+          }
+        }
+        else if ((j - newJ) == 2) {
+          if ((board(i)(j).isLower && board(i + 1)(j - 1).isUpper || board(i)(j).isUpper && board(i + 1)(j - 1).isLower) && (board(i + 1)(j - 1) != '-') && board(newI)(newJ) == '-') {
+            board(i + 1)(j - 1) = '-'
+            board(newI)(newJ) = board(i)(j)
+            board(i)(j) = '-'
+            flag = true
+          }
         }
       }
-      else if((j-newJ)==2){
-        if((board(i)(j).isLower&&board(i+1)(j-1).isUpper||board(i)(j).isUpper&&board(i+1)(j-1).isLower)&&(board(i+1)(j-1)!='-')&&board(newI)(newJ)=='-'){
-          board(i+1)(j-1)='-'
-          board(newI)(newJ)=board(i)(j)
-          board(i)(j)='-'
-          flag=true
-        }
-      }
-    }
     flag
   }
   def eatMove(board: Array[Array[Char]], i: Int, j: Int,newI:Int,newJ:Int): Boolean ={
@@ -208,7 +232,13 @@ class Checkers_Controller extends IController{
     flag
   }
   def vadiateInput(board: Array[Array[Char]],i:Int,j:Int,newI:Int,newJ:Int,player:Int): Boolean ={
-    if((player==0&&(!board(i)(j).isUpper)||player==0&&(!board(i)(j).isLower))||board(newI)(newJ)!='-'){
+    println("hhh")
+    println(player==0&&board(i)(j).isLower)
+    println(player==1&&board(i)(j).isUpper)
+    println(board(newI)(newJ)!='-')
+    println("HH")
+    println(player)
+    if(((player==0&&(board(i)(j).isLower))||(player==1&&board(i)(j).isUpper))||board(newI)(newJ)!='-'){
       false
     }
     else true
@@ -269,14 +299,17 @@ class Checkers_Controller extends IController{
     case "southE"=>j+2
   }
   def game(board: Array[Array[Char]],i:Int,j:Int,newI:Int,newJ:Int,player:Int) :Boolean = {
-
+    var flag =false
     if (!valdiateIndex(i, j) && (!valdiateIndex(i, j))) {
-      return false;
+      return false
     }
     if(!vadiateInput(board, i, j, newI, newJ, player)){
+      println(i,j)
+      println(newI,newJ)
       return false
     }
     var canEat = checkEat(board, 0, 0, player)
+    canEat.foreach(println)
     if (!canEat.isEmpty) {
       if (!canEat.contains(i * 8 + j)) {
         return false
@@ -286,14 +319,17 @@ class Checkers_Controller extends IController{
           var newReJ=newJ
           while (eatMatcher(board, newReI, newReJ)){
             var string =reEat(board, newReI, newReJ)
+            println(string)
             newReI=reEatNewi(string,newReI)
             newReJ=reEatNewj(string, newReJ)
-            if(newReI==0||newReI==7){
-              board(newReI)(newReJ)=promote(board, newReI, newReJ)
-            }
           }
+          if(newReI==0||newReI==7){
+            board(newReI)(newReJ)=promote(board, newReI, newReJ)
+          }
+          return true
         }
       }
+
     }
     else if(canMoveV(board, i, j)) {
       if(move(board, i, j, newI, newJ)){
@@ -303,7 +339,7 @@ class Checkers_Controller extends IController{
         return true
       }
     }
-    false
+    flag
   }
   def checkClicks(clicks:Array[(Int,Int)]): Boolean ={
     var flag=false
@@ -318,9 +354,10 @@ class Checkers_Controller extends IController{
     var newI=clicks(1)._1/69;
     var newJ=clicks(1)._2/69;
     var intPlayer=0
-    if(player)
+    if(!player)
       intPlayer=1
-    return game(board,i,j,newI,newJ,intPlayer)
+     var flag =game(board,i,j,newI,newJ,intPlayer)
+    flag
   }
 
 }
