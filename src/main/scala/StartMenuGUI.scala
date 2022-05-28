@@ -15,6 +15,7 @@ import scala.reflect.ClassManifestFactory.Null
 object StartMenuGUI {
 
   def main(args: Array[String]): Unit = {
+
     val app = new JFXApp {
       stage = new JFXApp.PrimaryStage {
         title = "BOARD GAMES ENGINE"
