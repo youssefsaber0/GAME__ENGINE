@@ -1,5 +1,3 @@
 [debug] not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/C:/Users/Dell/IdeaProjects/BOARD_GAMES_ENGINE/project/"), "board_games_engine-build")...
-[warn] Unrecognized repository Scala Plugin Bundled Repository, ignoring it
-[warn] Unrecognized repository Scala Plugin Bundled Repository, ignoring it
-[debug] Done updating ProjectRef(uri("file:/C:/Users/Dell/IdeaProjects/BOARD_GAMES_ENGINE/project/"), "board_games_engine-build")
+[debug] Updating ProjectRef(uri("file:/D:/WORK/1.Level2-Term2/Paradigms/Projects/GAME__ENGINE-main_branch/project/"), "game__engine-main_branch-build")...
+[debug] Done updating ProjectRef(uri("file:/D:/WORK/1.Level2-Term2/Paradigms/Projects/GAME__ENGINE-main_branch/project/"), "game__engine-main_branch-build")

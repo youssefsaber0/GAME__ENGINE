@@ -9,11 +9,11 @@ object King {
     val destinationRow: Int = destination._1
     val destinationColumn: Int = destination._2
 
-    if (Math.abs(destinationColumn - sourceColumn) != 1) {
+    if (Math.abs(destinationColumn - sourceColumn) == 1) {
       if (Math.abs(destinationRow - sourceRow) == 1 || Math.abs(destinationRow - sourceRow) == 0)
         return true
     }
-    else if (destinationColumn - destinationRow == 0){
+    else if (destinationColumn - sourceColumn == 0){
       if (Math.abs(destinationRow - sourceRow) == 1)
         return true
     }

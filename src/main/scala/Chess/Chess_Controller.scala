@@ -13,7 +13,6 @@ class Chess_Controller extends IController {
       Array('p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'),
       Array('r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'),
     )
-    printBoard(board)
     board
   }
 
@@ -57,8 +56,7 @@ class Chess_Controller extends IController {
     val sourceColumn: Int = source._2
     val sourcePiece: Char = board(sourceRow)(sourceColumn)
     val mover = pieceMatch(sourcePiece)
-    val isValidMove = mover(board, source, destination)
-    isValidMove
+    mover(board, source, destination)
   }
 
   def pieceMatch(sourcePiece : Char): (Array[Array[Char]], (Int, Int), (Int, Int)) => Boolean = sourcePiece match {
@@ -110,22 +108,24 @@ class Chess_Controller extends IController {
 
 }
 
-//object Main {
-//  def main(args: Array[String]): Unit = {
-//    val cont = new ChessController
-//    cont.initializeBoard()
-//    val pawnMove = cont.pieceMatch('p')
-//    var board = Array(
-//      Array('-', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'),
-//      Array('p', 'P', 'P', 'P', 'P', 'P', 'P', 'P'),
-//      Array('-', '-', '-', '-', '-', '-', '-', '-'),
-//      Array('-', '-', '-', '-', '-', '-', '-', '-'),
-//      Array('-', '-', '-', '-', '-', '-', '-', '-'),
-//      Array('-', '-', '-', '-', '-', '-', '-', '-'),
-//      Array('-', 'p', 'p', 'p', 'p', 'p', 'p', 'p'),
-//      Array('r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'),
-//    )
-//    pawnMove(board, (1, 0), (0, 0))
-//    cont.printBoard(board)
-//  }
-//}
+object Main {
+  def main(args: Array[String]): Unit = {
+    val cont = new Chess_Controller
+    cont.init()
+    val kingMove = cont.pieceMatch('k')
+    var board = Array(
+      Array('-', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'),
+      Array('p', 'P', 'P', 'P', 'P', 'P', 'P', 'P'),
+      Array('-', '-', '-', '-', '-', '-', '-', '-'),
+      Array('-', '-', '-', '-', '-', '-', '-', '-'),
+      Array('-', '-', '-', '-', '-', '-', '-', '-'),
+      Array('-', '-', '-', '-', '-', '-', '-', '-'),
+      Array('-', 'p', 'p', '-', '-', '-', 'p', 'p'),
+      Array('r', 'n', 'b', '-', 'k', '-', 'n', 'r'),
+    )
+    val source = (7, 4)
+    val dest = (6, 4)
+    if(kingMove(board, source, dest))  cont.makeMove(board,source,dest)
+    cont.printBoard(board)
+  }
+}
